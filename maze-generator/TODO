@@ -1,0 +1,5 @@
+- Needs a refactoring and testing
+
+- Implement Kruskal's and Prim's randomized algorithms
+
+- Implement a maze solver on top of this

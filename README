@@ -1,0 +1,10 @@
+This repository includes my old (and some recent) programs 
+that I enjoyed both implementing and watching it run.
+
+Older ones (from the time that DrScheme was version 452) 
+are modified only to be able to run with recent 
+(and decent - not draw.ss!) modules, no modification is 
+done beyond that.
+
+Caner Derici
+caner.derici@boun.edu.tr

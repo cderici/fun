@@ -1,0 +1,12 @@
+Random Maze Generator
+
+Generates a random maze by simple recursive backtracking.
+
+Just run the maze.rkt on DrRacket or 
+
+$ racket maze.rkt
+
+on command line.
+
+Caner Derici
+caner.derici@boun.edu.tr
