@@ -6,5 +6,37 @@ are modified only to be able to run with recent
 (and decent - not draw.ss!) modules, no modification is 
 done beyond that.
 
+- eratostheneSieve.rkt : Implements the Eratosthene's 
+Sieve using continuations.
+
+- hanoi-world.scm : Visually solve the Tower of Hanoi 
+problem.
+
+- listLengthPowerOfTwo.rkt : Determines if the length 
+of the given list is a power of two, without using any 
+usual arithmetic operations. (+,-,*,/, etc.)
+
+- lambdaCalculusInterpreter.rkt : A small interpreter 
+for a fully bracketed lambda calculus that is capable 
+of computing factorial using Y combinator.
+
+- maze-generator : Generates a random maze image using 
+basic recursive backtracking.
+
+- nim.rkt : Implements a graphical interface to play 
+the classical game Nim.
+
+- gravitation-xy.scm : An old interactive animation 
+which implements a naive gravitational pull. (Works 
+with up/right/left keys)
+
+- move-to-center.rkt : Small funny interactive 
+animation. Jus run and click anywhere.
+
+- scrambler.rkt : A funny random character sequencer.
+
+- str2bin.scm : An old program to convert ascii strings 
+to binary and vice versa.
+
 Caner Derici
 caner.derici@boun.edu.tr
