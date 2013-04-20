@@ -1,10 +1,24 @@
-This repository includes my old (and some recent) programs 
-that I enjoyed both implementing and watching it run.
+This repository does *not* hold a single project, but some 
+of my old (and some recent) programs that I enjoyed both 
+coding and watching it run.
 
-Older ones (from the time that DrScheme was version 452) 
-are modified only to be able to run with recent 
-(and decent - not draw.ss!) modules, no modification is 
-done beyond that.
+The reason for this repo is to keep these on my sight to 
+review and improve from time to time, and of course to 
+share it with you, should you enjoy watching simple and 
+nice programs running.
+
+The programs in there are written in Racket language. 
+They usually need the DrRacket to run, however, if you 
+want to have them running on the console, be my guest.
+
+You can download the DrRacket environment from :
+
+download.racket-lang.org
+
+Older ones (from the time that DrRacket was DrScheme - 
+and version 452) are modified only to be able to run with 
+recent (and decent - not draw.ss!) modules, no modification 
+is done beyond that.
 
 - eratostheneSieve.rkt : Implements the Eratosthene's 
 Sieve using continuations.
