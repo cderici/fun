@@ -93,3 +93,17 @@ assert h.data == [0,24,16,19,5,12,11,1,2,3,5]
    5  12 11 1
  2 3 5
 """
+
+# we can modify max heap to hold something like a
+# DataNode having fields for data and priority
+# and make this return the first-in one for a two having the same priority
+# for now this is gonna be simply a wrapper
+class PriorityQueue(object):
+    def __init__(self):
+        self.heap = MaxHeap()
+
+    def enqueue(self, data):
+        self.heap.add(data)
+
+    def dequeue(self):
+        return self.heap.pop_max()
