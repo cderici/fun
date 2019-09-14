@@ -9,7 +9,7 @@ def bin_search_rec(ls, n):
     if n == mid:
         return True
     elif n > mid:
-        return bin_search_rec(ls[mid_idx:], n)
+        return bin_search_rec(ls[mid_idx+1:], n)
     else:
         return bin_search_rec(ls[:mid_idx], n)
 
@@ -20,6 +20,12 @@ assert bin_search_rec([2,3], 2) == True
 assert bin_search_rec([1,2,3], 2) == True
 assert bin_search_rec([1,2,3], 3) == True
 assert bin_search_rec([1,2,3], 1) == True
+assert bin_search_rec([0,1,2,3,4,5], 4) == True
+assert bin_search_rec([0,1,2,3,4,5], 2) == True
+assert bin_search_rec([0,1,2,3,4,5], 8) == False
+assert bin_search_rec([1,2,3], 3) == True
+assert bin_search_rec([3], 3) == True
+
 
 def bin_search_iter(ls, n):
     if ls == []:
@@ -33,7 +39,7 @@ def bin_search_iter(ls, n):
         if n == mid:
             return True # could return mid_idx
         elif n > mid:
-            left = mid_idx
+            left = mid_idx+1
         else:
             right = mid_idx
     return False # could return -1 for not found
@@ -45,3 +51,8 @@ assert bin_search_iter([2,3], 2) == True
 assert bin_search_iter([1,2,3], 2) == True
 assert bin_search_iter([1,2,3], 3) == True
 assert bin_search_iter([1,2,3], 1) == True
+assert bin_search_iter([0,1,2,3,4,5], 4) == True
+assert bin_search_iter([0,1,2,3,4,5], 2) == True
+assert bin_search_iter([0,1,2,3,4,5], 8) == False
+assert bin_search_iter([1,2,3], 3) == True
+assert bin_search_iter([3], 3) == True
