@@ -101,3 +101,39 @@ assert m_sort([4,2,3,6,5,1,7]) == [1,2,3,4,5,6,7]
 assert m_sort([4,2,3,8,6,5,1,7]) == [1,2,3,4,5,6,7,8]
 assert m_sort([2,6,1,7,4,9,5]) == [1,2,4,5,6,7,9]
 assert m_sort([6,1,7,4]) == [1,4,6,7]
+
+
+# selection-sort
+# find the smallest element linear scan, swap it with current front
+# quite inefficient, quadratic
+
+def find_smallest_after(ls, c_front):
+    smallest_idx = c_front
+    for i in range(c_front+1, len(ls)):
+        if ls[i] < ls[smallest_idx]:
+            smallest_idx = i
+    return smallest_idx
+
+def s_sort(ls):
+    c_front = 0 # current front
+    ls_len = len(ls)
+
+    while c_front < ls_len:
+        smallest_idx = find_smallest_after(ls, c_front)
+        if ls[smallest_idx] < ls[c_front]:
+            ls[c_front], ls[smallest_idx] = ls[smallest_idx], ls[c_front]
+        c_front += 1
+    return ls
+
+assert s_sort([]) == []
+assert s_sort([1]) == [1]
+assert s_sort([2,1]) == [1,2]
+assert s_sort([2,3,1]) == [1,2,3]
+assert s_sort([4,2,3,1]) == [1,2,3,4]
+assert s_sort([4,2,2,3,1]) == [1,2,2,3,4]
+assert s_sort([4,2,3,5,1]) == [1,2,3,4,5]
+assert s_sort([4,2,3,6,5,1]) == [1,2,3,4,5,6]
+assert s_sort([4,2,3,6,5,1,7]) == [1,2,3,4,5,6,7]
+assert s_sort([4,2,3,8,6,5,1,7]) == [1,2,3,4,5,6,7,8]
+assert s_sort([2,6,1,7,4,9,5]) == [1,2,4,5,6,7,9]
+assert s_sort([6,1,7,4]) == [1,4,6,7]
