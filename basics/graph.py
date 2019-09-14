@@ -53,21 +53,6 @@ class Vertex(object):
                 return t
         return False
 
-    def _bfs(self, target_data):
-        q = Queue()
-        self.visited = True
-        q.enqueue(self)
-
-        while not q.is_empty():
-            node = q.dequeue()
-            if node.data == target_data:
-                return node
-            for nd in node.neighbors:
-                if not nd.visited:
-                    q.enqueue(nd)
-        return False
-
-
 class Graph(object):
     vertices = {}
 
@@ -116,8 +101,25 @@ class Graph(object):
         # reset the visited flags (to avoid cycles)
         for k, v in self.vertices.iteritems():
             v.visited = False
+
         # go
-        return self.vertices[source_data]._bfs(target_data)
+        source_vertex = self.vertices[source_data]
+        # crete empty queue
+        q = Queue()
+        source_vertex.visited = True
+        # put the start in the queue
+        q.enqueue(source_vertex)
+
+        while not q.is_empty():
+            # dequeue a node to inspect
+            node = q.dequeue()
+            if node.data == target_data:
+                return node
+            for nd in node.neighbors:
+                # enqueue all the non-visited neighbors
+                if not nd.visited:
+                    q.enqueue(nd)
+        return False
 
 g = Graph()
 g.add_vertex_by_data('a')
