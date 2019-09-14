@@ -14,11 +14,25 @@ adj matrix
 
 # adj list
 
+class Queue(object): # will be used in bfs
+    def __init__(self, container=[]):
+        self.container = container
+
+    def is_empty(self):
+        return self.container == []
+
+    def enqueue(self, data):
+        self.container.append(data)
+
+    def dequeue(self):
+        return self.container.pop(0)
+
 # graph - adj list
 class Vertex(object):
     def __init__(self, data):
         self.data = data
         self.neighbors = []
+        self.visited = False
 
     def add_edge(self, v):
         if v not in self.neighbors:
@@ -26,6 +40,33 @@ class Vertex(object):
 
     def _print(self):
         print "%s : %s" % (self.data, [v.data for v in self.neighbors])
+
+    def _dfs(self, target_data):
+        if self.visited:
+            return False
+        self.visited = True
+        if self.data == target_data:
+            return self
+        for n in self.neighbors:
+            t = n._dfs(target_data)
+            if t:
+                return t
+        return False
+
+    def _bfs(self, target_data):
+        q = Queue()
+        self.visited = True
+        q.enqueue(self)
+
+        while not q.is_empty():
+            node = q.dequeue()
+            if node.data == target_data:
+                return node
+            for nd in node.neighbors:
+                if not nd.visited:
+                    q.enqueue(nd)
+        return False
+
 
 class Graph(object):
     vertices = {}
@@ -58,6 +99,26 @@ class Graph(object):
         for k, v in self.vertices.iteritems():
             v._print()
 
+    def depth_first_search(self, source_data, target_data):
+        if source_data not in self.vertices:
+            return False
+
+        # reset the visited flags
+        for k,v in self.vertices.iteritems():
+            v.visited = False
+        # go
+        return self.vertices[source_data]._dfs(target_data)
+
+    def breadth_first_search(self, source_data, target_data):
+        if source_data not in self.vertices:
+            return False
+
+        # reset the visited flags (to avoid cycles)
+        for k, v in self.vertices.iteritems():
+            v.visited = False
+        # go
+        return self.vertices[source_data]._bfs(target_data)
+
 g = Graph()
 g.add_vertex_by_data('a')
 g.add_vertex_by_data('b')
@@ -78,18 +139,21 @@ g.add_edge_by_data('e','a')
 g.add_edge_by_data('e','c')
 
 g.print_graph()
-
+assert g.depth_first_search('a', 'd')
+assert g.breadth_first_search('a', 'd')
 
 # adj matrix (undirected)
 
 class VertexM(object):
     def __init__(self, data):
         self.data = data
+        self.visited = False
 
 class GraphM(object):
     vertices = {}
     matrix = []
     vertex_indices = {}
+    # this is not ideal, not easy to find a vertex by an index in the matrix
 
     def add_vertex(self, data):
         if data not in self.vertices:
@@ -119,7 +183,6 @@ class GraphM(object):
                 ret += " %s " % self.matrix[i][j]
             ret += " \n"
         print ret
-
 
 g = GraphM()
 g.add_vertex('a')
