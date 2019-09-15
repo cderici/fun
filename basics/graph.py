@@ -15,8 +15,8 @@ adj matrix
 # adj list
 
 class Queue(object): # will be used in bfs
-    def __init__(self, container=[]):
-        self.container = container
+    def __init__(self):
+        self.container = []
 
     def is_empty(self):
         return self.container == []
@@ -113,12 +113,48 @@ class Graph(object):
         while not q.is_empty():
             # dequeue a node to inspect
             node = q.dequeue()
+            node.visited = True
             if node.data == target_data:
                 return node
             for nd in node.neighbors:
                 # enqueue all the non-visited neighbors
                 if not nd.visited:
                     q.enqueue(nd)
+        return False
+
+    # bidirectional bfs
+    def meeting_point(self, source1_data, source2_data):
+        if source1_data not in self.vertices or\
+           source2_data not in self.vertices:
+            return False
+
+        # reset the visited flags (to avoid cycles)
+        for k, v in self.vertices.iteritems():
+            v.visited = False
+
+
+        source1_vertex = self.vertices[source1_data]
+        source2_vertex = self.vertices[source2_data]
+        # create visited sets and put these in them
+        visited_by_1 = set([source1_vertex])
+        visited_by_2 = set([source2_vertex])
+        # create an empty queue
+        qu = Queue()
+        # put the first two vertices in it
+        qu.enqueue(source1_vertex)
+        qu.enqueue(source2_vertex)
+
+        while not qu.is_empty():
+            node = qu.dequeue()
+            if node in visited_by_1 and node in visited_by_2:
+                return node
+            for nd in node.neighbors:
+                if not nd.visited:
+                    if node in visited_by_1:
+                        visited_by_1.add(nd)
+                    if node in visited_by_2:
+                        visited_by_2.add(nd)
+                    qu.enqueue(nd)
         return False
 
 g = Graph()
@@ -143,6 +179,7 @@ g.add_edge_by_data('e','c')
 g.print_graph()
 assert g.depth_first_search('a', 'd')
 assert g.breadth_first_search('a', 'd')
+assert g.meeting_point('a', 'd').data == 'c'
 
 # adj matrix (undirected)
 
