@@ -42,6 +42,15 @@ class Node(object):
             if self.right:
                 self.right.inorder_print()
 
+    def _get_height(self):
+        rh, lh = 0, 0
+        if self.right:
+            rh = self.right._get_height()
+        if self.left:
+            lh = self.left._get_height()
+
+        return max(rh,lh) + 1
+
 class Tree(object):
     def __init__(self):
         self.root = None
@@ -63,6 +72,11 @@ class Tree(object):
             return
         self.root.inorder_print()
 
+    def get_height(self):
+        if not self.root:
+            return 0
+        return self.root._get_height()
+
 t = Tree()
 t.add(15)
 t.add(9)
@@ -72,8 +86,14 @@ t.add(3)
 t.add(6)
 t.add(19)
 t.add(18)
-
+"""
+       15
+     9  17
+   5     19
+ 3  6   18
+"""
 #print t.root.left.left.data
 
 assert t.find(5)
 t.print_in_order()
+print "height : %s" % t.get_height()
